@@ -1,16 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Aviation Weather</title>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <link href="src/styles.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/e47d43d561.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <h1>Hello Git</h1>
-    <p>coded by Marta Koren</p>
+    <div class="container">
+      <div class="row airport">
+        <div class="col">KORL</div>
+        <div class="col">KORD</div>
+        <div class="col">KJFK</div>
+        <div class="col"></div>
+      </div>
+      <form class="search-form" id="search-form">
+        <div class="row">
+          <div class="col-6">
+            <input
+              type="search"
+              placeholder="Search an airport..."
+              autofocus="on"
+              autocomplete="off"
+              id="city-input"
+              class="form-control shadow-sm"
+            />
+          </div>
+          <div class="col-2">
+            <input
+              type="submit"
+              value="Search"
+              class="form-control btn btn-primary shadow-sm"
+            />
+          </div>
+          <div class="col-3">
+            <button id="currentLocation">Current Location</button>
+          </div>
+        </div>
+      </form>
 
-    <script src="script.js"></script>
+      <div>
+        <span id="newAirport"> KMCO </span>
+        <span id="search-addon">
+          <i class="fa-solid fa-jet-fighter"></i>
+        </span>
+      </div>
+      <h3>Orlando International Airport</h3>
+      <p class="coordinates">
+        <span> Lat: </span> 28.42°N <span> Lon: </span> 81.32°W
+        <span> Elev: </span> 89ft
+      </p>
+      <div class="date" id="date">Today</div>
+      <div class="row">
+        <div class="col">
+          <i class="fa-solid fa-cloud-sun"></i>
+        </div>
+        <div class="col">
+          <ul class="data">
+            <li class="datainfo" id="description">Mostly Cloudy</li>
+            <li>
+              <span class="temperatureinfo" id="temperatureinfo"> 88 </span>
+              <span class="datainfoFC" id="datainfoFC">
+                <button class="Farengait" id="Farengait">°F</button> /
+                <button class="Celcius" id="Celcius">°C</button>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div class="col data3">
+          <span> Humidity </span> 57%
+          <br />
+          <span> Wind Speed </span> 7 mph
+          <br />
+          <span> Barometer </span> 30.09 in (1018.7 mb)
+          <br />
+          <span> Dewpoint </span> 71°F (22°C)
+          <br />
+          <span> Visibility </span> mi Heat Index 94°F (34°C)
+          <br />
+          <span> Last update </span> 2 Jul 11:53 am EDT
+        </div>
+      </div>
+
+      <div class="row brodcast">
+        <div class="col">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <h5 class="card-title">Today</h5>
+              <h6 class="card-subtitle">🌧</h6>
+              <div class="card" style="width: 100%">
+                <div class="card-body">
+                  <p class="card-text red">High:92°F</p>
+                </div>
+              </div>
+              <p class="card-text">Shovers likely</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <h5 class="card-title">Tonight</h5>
+              <h6 class="card-subtitle">⛈</h6>
+              <div class="card" style="width: 100%">
+                <div class="card-body">
+                  <p class="card-text blue">Low:74°F</p>
+                </div>
+              </div>
+              <p class="card-text">
+                Shovers likely then slight chance of T-Storms
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <h5 class="card-title">Sunday</h5>
+              <h6 class="card-subtitle">🌦</h6>
+              <div class="card" style="width: 100%">
+                <div class="card-body">
+                  <p class="card-text red">High:92°F</p>
+                </div>
+              </div>
+              <p class="card-text">Chance T-storms then Showers Likely</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <h5 class="card-title">Sunday night</h5>
+              <h6 class="card-subtitle">⛈</h6>
+              <div class="card" style="width: 100%">
+                <div class="card-body">
+                  <p class="card-text blue">Low:75°F</p>
+                </div>
+              </div>
+              <p class="card-text">Slight chance T-Storms then mostly cloudy</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" style="width: 100%">
+            <div class="card-body">
+              <h5 class="card-title">Monday</h5>
+              <h6 class="card-subtitle">🌦</h6>
+              <div class="card" style="width: 100%">
+                <div class="card-body">
+                  <p class="card-text red">High:93°F</p>
+                </div>
+              </div>
+              <p class="card-text">Chance T-storms then Showers Likely</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a
+        href="https://forecast.weather.gov/MapClick.php?lat=28.4313&lon=-81.3084#.Yst-oOzMK3I"
+        class="Card link"
+        >More info</a
+      >
+      <div class="coded">Coded by Marta Koren</div>
+    </div>
+    <script src="src/index.js"></script>
   </body>
 </html>
